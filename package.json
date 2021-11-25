@@ -1,6 +1,6 @@
 {
   "name": "pageom",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Page Object Model (POM) framework for Playwright.dev projects.",
   "source": "src/index.ts",
   "main": ".dist/index.js",
