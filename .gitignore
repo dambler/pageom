@@ -1,0 +1,12 @@
+# OS
+.DS_Store
+
+# Build artifacts
+.parcel-cache/
+.dist/
+
+# Node
+node_modules/
+
+# Test artifacts
+.coverage/
