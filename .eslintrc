@@ -4,13 +4,19 @@
   "plugins": [
     "@typescript-eslint",
     "jest",
+    "import",
     "prettier"
   ],
   "rules": {
     "prettier/prettier": ["error"],
     "import/extensions": "off"
   },
-  "extends": ["airbnb-base", "prettier", "plugin:import/typescript"],
+  "extends": [
+    "airbnb-base", 
+    "prettier", 
+    "plugin:import/recommended", 
+    "plugin:import/typescript"
+  ],
   "env": {
     "jest/globals": true
   }
