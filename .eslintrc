@@ -1,0 +1,17 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "jest",
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": ["error"],
+    "import/extensions": "off"
+  },
+  "extends": ["airbnb-base", "prettier", "plugin:import/typescript"],
+  "env": {
+    "jest/globals": true
+  }
+}

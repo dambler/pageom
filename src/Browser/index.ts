@@ -1,5 +1,5 @@
-import playwright from "playwright";
-import { INITIALIZE_BROWSER_FIRST_ERROR } from "./constants/errors";
+import playwright from 'playwright';
+import { INITIALIZE_BROWSER_FIRST_ERROR } from './constants/errors';
 
 export type PageomBrowserOptions = {
   browserType: playwright.BrowserType;
@@ -17,8 +17,11 @@ export const DEFAULT_CONTEXT_OPTIONS: playwright.BrowserContextOptions = {};
 
 export default class PageomBrowser {
   #browser?: playwright.Browser;
+
   #context?: playwright.BrowserContext;
+
   #options: PageomBrowserOptions;
+
   #page?: playwright.Page;
 
   constructor(options: PageomBrowserOptions = DEFAULT_LAUNCH_OPTIONS) {
