@@ -1,4 +1,5 @@
 import playwright from "playwright";
+import { INITIALIZE_BROWSER_FIRST_ERROR } from "./constants/errors";
 
 export type PageomBrowserOptions = {
   browserType: playwright.BrowserType;
@@ -8,7 +9,7 @@ export type PageomBrowserOptions = {
 
 export const DEFAULT_LAUNCH_OPTIONS: PageomBrowserOptions = {
   browserType: playwright.chromium,
-  launchOptions: { headless: true },
+  launchOptions: { headless: false },
   contextOptions: {},
 };
 
@@ -20,8 +21,8 @@ export default class PageomBrowser {
   #options: PageomBrowserOptions;
   #page?: playwright.Page;
 
-  constructor(options?: PageomBrowserOptions) {
-    this.#options = options || DEFAULT_LAUNCH_OPTIONS;
+  constructor(options: PageomBrowserOptions = DEFAULT_LAUNCH_OPTIONS) {
+    this.#options = options;
   }
 
   /**
@@ -39,19 +40,12 @@ export default class PageomBrowser {
    * Close the PageomBrowser instance.
    */
   public close = async () => {
-    if (!this.#browser)
-      throw new Error(
-        `Cannot close Browser as Browser does not exist. Have you run initialize?`
-      );
-
+    if (!this.#browser) throw new Error(INITIALIZE_BROWSER_FIRST_ERROR);
     await this.#browser.close();
   };
 
   public get Page() {
-    if (!this.#page)
-      throw new Error(
-        "Cannot get Page as does not exist. Have you run initialize?"
-      );
+    if (!this.#page) throw new Error(INITIALIZE_BROWSER_FIRST_ERROR);
     return this.#page;
   }
 }
