@@ -1,4 +1,4 @@
-# Pageom (Page Om)
+# PageOM
 
 Page Object Model framework for Playwright.dev
 

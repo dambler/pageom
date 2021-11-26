@@ -1,11 +1,11 @@
 {
-  "name": "pageom",
+  "name": "PageOM",
   "version": "0.0.1",
   "description": "Page Object Model (POM) framework for Playwright.dev projects.",
   "source": "src/index.ts",
   "main": ".dist/index.js",
   "types": ".dist/types.d.ts",
-  "url": "https://github.com/dambler/pageom",
+  "url": "https://github.com/dambler/PageOM",
   "scripts": {
     "build:dev": "parcel build",
     "build:prod": "NODE_ENV=production parcel build --no-source-maps",

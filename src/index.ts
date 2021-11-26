@@ -1,4 +1,5 @@
-import PageomBrowser from './Browser';
-import PageomPage from './Page';
+import findBy from './Element/decorators/findBy';
+import PageOMBrowser from './Browser';
+import PageOMPage from './Page';
 
-export { PageomBrowser, PageomPage };
+export { findBy, PageOMBrowser, PageOMPage };
