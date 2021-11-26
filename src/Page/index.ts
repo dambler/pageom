@@ -1,10 +1,10 @@
 import playwright from 'playwright';
-
+import { VisitOptions } from '../types/VisitOptions';
 import PageomBrowser from '../Browser';
-import { WaitUntilValues } from '../types/WaitUntilValues';
+import { CANNOT_NAVIGATE_WITHOUT_SLUG } from './constants/errors';
 
 export default abstract class PageomPage {
-  slug: string = '';
+  slug?: string;
 
   page: playwright.Page;
 
@@ -12,9 +12,14 @@ export default abstract class PageomPage {
     this.page = browser.Page;
   }
 
-  visit = async (options?: {
-    referer?: string;
-    timeout?: number;
-    waitUntil?: WaitUntilValues;
-  }) => this.page.goto(this.slug, options);
+  /**
+   * Navigates directly to the page. Requires the Page to have a slug set.
+   */
+  public visit = async (options?: VisitOptions) => {
+    if (!this.slug) {
+      throw new Error(CANNOT_NAVIGATE_WITHOUT_SLUG);
+    }
+
+    return this.page.goto(this.slug, options);
+  };
 }

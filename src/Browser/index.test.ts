@@ -36,7 +36,9 @@ describe('PageomBrowser', () => {
 
       test('should call browser launch with default launch options', () => {
         expect(playwrightMock.launch).toHaveBeenCalled();
-        expect(playwrightMock.launch).toHaveBeenCalledWith(DEFAULT_LAUNCH_OPTIONS.launchOptions);
+        expect(playwrightMock.launch).toHaveBeenCalledWith(
+          DEFAULT_LAUNCH_OPTIONS.launchOptions
+        );
       });
 
       test('should call create new context', () => {
@@ -86,7 +88,9 @@ describe('PageomBrowser', () => {
 
   test('should throw error when calling close before initializing', async () => {
     browser = new PageomBrowser();
-    await expect(async () => browser.close()).rejects.toThrow(INITIALIZE_BROWSER_FIRST_ERROR);
+    await expect(async () => browser.close()).rejects.toThrow(
+      INITIALIZE_BROWSER_FIRST_ERROR
+    );
   });
 
   test('should throw error when attempting to call Page before initializing', () => {
