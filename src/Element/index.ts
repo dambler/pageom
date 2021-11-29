@@ -1,13 +1,18 @@
+import { TypeActionOptions } from '../types/TypeActionOptions';
 import { PageOMBrowser } from '../Browser';
 import { ClickActionOptions } from '../types/ClickActionOptions';
 import { FindByOptions } from '../types/FindByOptions';
+import { PageOMElementCollection } from './Collection';
 
 export class PageOMElement {
   #selector: string;
 
   #options: FindByOptions;
 
-  constructor(selector: string, options: FindByOptions) {
+  constructor(
+    selector: string,
+    options: FindByOptions = { parent: undefined, index: undefined }
+  ) {
     this.#selector = selector;
     this.#options = options;
   }
@@ -36,7 +41,19 @@ export class PageOMElement {
    *
    * @param text
    */
-  public type = async (text: string) => {
-    await this.#locator.type(text);
+  public type = async (text: string, options?: TypeActionOptions) => {
+    await this.#locator.type(text, options);
   };
+
+  public get all() {
+    return new PageOMElementCollection(this.#selector, this.#options.parent);
+  }
+
+  /**
+   * The playwright Locator object. This can be used if something is not yet implemented
+   * in PageOM.
+   */
+  public get locator() {
+    return this.#locator;
+  }
 }
