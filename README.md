@@ -8,16 +8,16 @@ Still very much work in progress and isn't ready for general use yet.
 
 ```typescript
 // login.page.ts
-import { findBy, PageOMPage, PageOMElement } from 'pageom'
+import { findBy, PageOMPage, PageOMElement } from 'pageom';
 
 class LoginPage extends PageOMPage {
-  slug = "/login"
+  slug = '/login';
 
   @findBy('.login-btn') submitButton: PageOMElement;
 
-  @findBy('.username) usernameField: PageOMElement;
+  @findBy('.username') usernameField: PageOMElement;
 
-  @findBy('.password) passwordField: PageOMElement;
+  @findBy('.password') passwordField: PageOMElement;
 
   /*
    * Attempt to log in to a users account using the provided credentials.
@@ -26,6 +26,6 @@ class LoginPage extends PageOMPage {
     await this.usernameField.type(username);
     await this.passwordField.type(password);
     await this.submitButton.click();
-  }
+  };
 }
 ```

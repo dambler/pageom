@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2016",
+    "target": "esnext",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "module": "commonjs",
@@ -8,7 +8,8 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "lib": ["esnext.asynciterable", "ES2015"]
   },
   "exclude": [".dist/"]
 }
