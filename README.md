@@ -6,7 +6,7 @@ Still very much work in progress and isn't ready for general use yet.
 
 # Page Class Example
 
-```
+```typescript
 // login.page.ts
 import { findBy, PageOMPage, PageOMElement } from 'pageom'
 
