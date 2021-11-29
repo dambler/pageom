@@ -1,54 +1,48 @@
-import playwright from 'playwright';
+import {
+  BrowserType,
+  LaunchOptions,
+  BrowserContextOptions,
+  chromium,
+  Browser,
+  Page,
+  BrowserContext,
+} from 'playwright';
 import { INITIALIZE_BROWSER_FIRST_ERROR } from './constants/errors';
 
-export type PageomBrowserOptions = {
-  browserType: playwright.BrowserType;
-  launchOptions: playwright.LaunchOptions;
-  contextOptions: playwright.BrowserContextOptions;
+export type PageOMBrowserOptions = {
+  browserType: BrowserType;
+  launchOptions: LaunchOptions;
+  contextOptions: BrowserContextOptions;
 };
 
-export const DEFAULT_LAUNCH_OPTIONS: PageomBrowserOptions = {
-  browserType: playwright.chromium,
-  launchOptions: { headless: false },
+export const DEFAULT_LAUNCH_OPTIONS: PageOMBrowserOptions = {
+  browserType: chromium,
+  launchOptions: { headless: true },
   contextOptions: {},
 };
 
-export const DEFAULT_CONTEXT_OPTIONS: playwright.BrowserContextOptions = {};
+export class PageOMBrowser {
+  static #browser?: Browser;
 
-export default class PageomBrowser {
-  #browser?: playwright.Browser;
+  static #page?: Page;
 
-  #context?: playwright.BrowserContext;
+  static #context: BrowserContext;
 
-  #options: PageomBrowserOptions;
-
-  #page?: playwright.Page;
-
-  constructor(options: PageomBrowserOptions = DEFAULT_LAUNCH_OPTIONS) {
-    this.#options = options;
-  }
-
-  /**
-   * Launch a PageomBrowser. This must be called before attempting to interact with the
-   * browser.
-   */
-  public initialize = async () => {
-    const { browserType, launchOptions, contextOptions } = this.#options;
-    this.#browser = await browserType.launch(launchOptions);
-    this.#context = await this.#browser.newContext(contextOptions);
-    this.#page = await this.#context.newPage();
+  static initialize = async (options: PageOMBrowserOptions = DEFAULT_LAUNCH_OPTIONS) => {
+    const { browserType, launchOptions, contextOptions } = options;
+    PageOMBrowser.#browser = await browserType.launch(launchOptions);
+    PageOMBrowser.#context = await PageOMBrowser.#browser.newContext(contextOptions);
+    PageOMBrowser.#page = await PageOMBrowser.#context.newPage();
   };
 
-  /**
-   * Close the PageomBrowser instance.
-   */
-  public close = async () => {
-    if (!this.#browser) throw new Error(INITIALIZE_BROWSER_FIRST_ERROR);
-    await this.#browser.close();
+  static close = async () => {
+    if (!PageOMBrowser.#browser) throw new Error(INITIALIZE_BROWSER_FIRST_ERROR);
+    await PageOMBrowser.#browser.close();
+    PageOMBrowser.#browser = undefined;
   };
 
-  public get Page() {
-    if (!this.#page) throw new Error(INITIALIZE_BROWSER_FIRST_ERROR);
-    return this.#page;
+  static get Page() {
+    if (!PageOMBrowser.#page) throw new Error(INITIALIZE_BROWSER_FIRST_ERROR);
+    return PageOMBrowser.#page;
   }
 }
