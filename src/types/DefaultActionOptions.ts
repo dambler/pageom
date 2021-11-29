@@ -1,5 +1,3 @@
-type DefaultActionOptions = {
+export type DefaultActionOptions = {
   force: boolean;
 };
-
-export default DefaultActionOptions;

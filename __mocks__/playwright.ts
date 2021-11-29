@@ -1,12 +1,13 @@
-const newPage = jest.fn().mockReturnValue(() => jest.fn());
-const newContext = jest.fn().mockReturnValue({ newPage });
-const launch = jest.fn().mockReturnValue({ newContext });
+const newPage = jest
+  .fn()
+  .mockReturnValue(() => jest.fn())
+  .mockName('newPage');
+const close = jest.fn().mockName('close');
+const newContext = jest.fn().mockReturnValue({ newPage }).mockName('newContext');
+const launch = jest.fn().mockReturnValue({ newContext, close }).mockName('launch');
 
-const playwright = {
-  chromium: {
-    launch,
-  },
+const chromium = {
+  launch,
 };
 
-export default playwright;
-export { newPage, newContext, launch };
+export { newPage, newContext, launch, close, chromium };

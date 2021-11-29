@@ -1,12 +1,12 @@
-import PageOMElement from '..';
-import FindByOptions from '../../types/FindByOptions';
+import { PageOMElement } from '..';
+import { FindByOptions } from '../../types/FindByOptions';
 
 const VISIBLITY_MODIFIER = ':visible';
 
 /**
  * Defines an Element on a Page.
  */
-const findBy =
+export const findBy =
   (selector: string, options: FindByOptions = {}) =>
   (element: object, property: string) => {
     if (!options.skipVisibilityCheck && selector.endsWith(VISIBLITY_MODIFIER)) {
@@ -20,5 +20,3 @@ const findBy =
       },
     });
   };
-
-export default findBy;

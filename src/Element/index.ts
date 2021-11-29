@@ -1,8 +1,8 @@
-import PageOMBrowser from '../Browser';
-import ClickActionOptions from '../types/ClickActionOptions';
-import FindByOptions from '../types/FindByOptions';
+import { PageOMBrowser } from '../Browser';
+import { ClickActionOptions } from '../types/ClickActionOptions';
+import { FindByOptions } from '../types/FindByOptions';
 
-export default class PageOMElement {
+export class PageOMElement {
   #selector: string;
 
   #options: FindByOptions;
@@ -29,6 +29,14 @@ export default class PageOMElement {
    * @param options
    */
   public click = async (options?: ClickActionOptions) => {
-    this.#locator.click(options);
+    await this.#locator.click(options);
+  };
+
+  /**
+   *
+   * @param text
+   */
+  public type = async (text: string) => {
+    await this.#locator.type(text);
   };
 }
